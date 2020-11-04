@@ -19,8 +19,10 @@ jobs:
         dotnet-version: 2.1.515
     - name: Install dependencies
       run: dotnet restore
+      working-directory: './Source'
     - name: Build
       working-directory: './Source'
       run: dotnet build --configuration Release --no-restore
     - name: Test
+      working-directory: './Source'
       run: dotnet test --no-restore --verbosity normal
