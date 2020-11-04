@@ -32,6 +32,6 @@ jobs:
       # Name of the Azure Web App
         app-name: 'GreatIdeasRessourceBBR'
       # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
-        publish-profile: $PUBLISH_PROFILE # optional
+        publish-profile: ${{ secrets.PUBLISH_PROFILE }} # optional
       
     
