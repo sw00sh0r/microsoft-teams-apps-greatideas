@@ -1,0 +1,37 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.1.515
+    - name: Install dependencies
+      run: dotnet restore
+      working-directory: './Source'
+    - name: Build
+      working-directory: './Source'
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      working-directory: './Source'
+      run: dotnet test --no-restore --verbosity normal
+    - name: Azure WebApp
+      uses: Azure/webapps-deploy@v2
+      with:
+      # Name of the Azure Web App
+        app-name: 'GreatIdeasRessourceBBR'
+      # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
+        publish-profile: ${{ secrets.PUBLISH_PROFILE }} # optional
+      
+    
