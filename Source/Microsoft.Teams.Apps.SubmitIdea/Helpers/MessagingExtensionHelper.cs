@@ -131,6 +131,10 @@ namespace Microsoft.Teams.Apps.SubmitIdea.Helpers
                     teamPostResults = await this.teamIdeaSearchService.GetTeamIdeasAsync(IdeaSearchScope.Approved, query, userObjectId, count, skip);
                     composeExtensionResult = await this.GetTeamPostResultAsync(teamPostResults);
                     break;
+                case Constants.MyIdeaIdeaCommandId: // Get my ideas
+                    teamPostResults = await this.teamIdeaSearchService.GetTeamIdeasAsync(IdeaSearchScope.PostedByMe, query, userObjectId, count, skip);
+                    composeExtensionResult = await this.GetTeamPostResultAsync(teamPostResults);
+                    break;
             }
 
             return composeExtensionResult;
