@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-import { ApplicationInsights } from "@microsoft/applicationinsights-web";
+import { ApplicationInsights, ITelemetryPlugin } from "@microsoft/applicationinsights-web";
 import { ReactPlugin } from "@microsoft/applicationinsights-react-js";
 
 export const getApplicationInsightsInstance = (telemetry: any, browserHistory: any): any => {
@@ -14,7 +14,7 @@ export const getApplicationInsightsInstance = (telemetry: any, browserHistory: a
         appInsights = new ApplicationInsights({
             config: {
                 instrumentationKey: telemetry,
-                extensions: [reactPlugin],
+                extensions: [reactPlugin as ITelemetryPlugin],
                 extensionConfig: {
                     [reactPlugin.identifier]: { history: browserHistory }
                 }
@@ -27,7 +27,7 @@ export const getApplicationInsightsInstance = (telemetry: any, browserHistory: a
         appInsights = new ApplicationInsights({
             config: {
                 instrumentationKey: undefined,
-                extensions: [reactPlugin],
+                extensions: [reactPlugin as ITelemetryPlugin],
                 extensionConfig: {
                     [reactPlugin.identifier]: { history: browserHistory }
                 }
